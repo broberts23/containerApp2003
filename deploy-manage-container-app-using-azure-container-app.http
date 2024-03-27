@@ -1,0 +1,6 @@
+@deploy_manage_container_app_using_azure_container_app_HostAddress = http://localhost:5098
+
+GET {{deploy_manage_container_app_using_azure_container_app_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
