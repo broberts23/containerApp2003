@@ -1,6 +1,7 @@
 
 param location string
 param resourceName string
+param umiName string
 
 // resource resourceGroup 'Microsoft.Resources/resourceGroups@2023-07-01' = {
 //   name: 'RG1'
@@ -151,4 +152,9 @@ resource sb_apl2003_br_default 'Microsoft.ServiceBus/namespaces/networkrulesets@
     ipRules: []
     trustedServiceAccessEnabled: false
   }
+}
+
+resource userAssignedIdentity 'Microsoft.ManagedIdentity/userAssignedIdentities@2023-07-31-preview' = {
+  name: umiName
+  location: location
 }
