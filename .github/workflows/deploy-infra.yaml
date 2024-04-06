@@ -8,7 +8,7 @@ permissions:
   contents: read
 
 env:
-  resource-group: myResourceGroup # name of the Azure resource group
+  resource-group: RG1 # name of the Azure resource group
 
 jobs:
   bicep-deploy:
