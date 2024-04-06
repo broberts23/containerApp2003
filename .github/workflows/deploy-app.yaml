@@ -42,3 +42,8 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+    - name: Build and push image
+      id: build-image
+      run: |
+        az acr build --image ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }} --registry ${{ env.REGISTRY_NAME }}.azurecr.io --file "Dockerfile" .
