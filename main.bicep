@@ -94,6 +94,7 @@ module registry 'br/public:avm/res/container-registry/registry:0.1.1' = {
     // ]
     acrAdminUserEnabled: false
     acrSku: 'Premium'
+    publicNetworkAccess: 'Enabled'
     softDeletePolicyStatus: 'disabled'
     location: location
     tags: {
