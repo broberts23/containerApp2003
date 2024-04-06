@@ -92,19 +92,14 @@ module registry 'br/public:avm/res/container-registry/registry:0.1.1' = {
     //     subnetResourceId: virtualNetwork.outputs.subnetNames[0]
     //   }
     // ]
-    acrAdminUserEnabled: true
+    acrAdminUserEnabled: false
     acrSku: 'Premium'
-    azureADAuthenticationAsArmPolicyStatus: 'enabled'
-    exportPolicyStatus: 'enabled'
-    location: location
-    quarantinePolicyStatus: 'enabled'
-    softDeletePolicyDays: 7
     softDeletePolicyStatus: 'disabled'
+    location: location
     tags: {
       Environment: environment
       'hidden-title': 'Container Registry'
       Role: 'DeploymentValidation'
     }
-    trustPolicyStatus: 'enabled'
   }
 }
