@@ -20,10 +20,10 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@main
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
+    # - name: Set up Docker Buildx
+    #   uses: docker/setup-buildx-action@v3
 
     - name: "Az CLI login"
       uses: azure/login@v2
@@ -31,10 +31,6 @@ jobs:
         client-id: ${{ secrets.AZURE_CLIENT_ID }}
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
-    - name: Login to ACR
-      run: |
-        az acr login --name ${{ env.REGISTRY_NAME }}
 
     # - name: Build and push Docker image
     #   uses: docker/build-push-action@v5
@@ -46,4 +42,4 @@ jobs:
     - name: Build and push image
       id: build-image
       run: |
-        az acr build --image ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }} --registry ${{ env.REGISTRY_NAME }}.azurecr.io --file "Dockerfile" .
+        az acr build --image ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }} --registry ${{ env.REGISTRY_NAME }} --file "Dockerfile" .
