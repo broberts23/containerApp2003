@@ -36,12 +36,12 @@ jobs:
       run: |
         az acr login --name ${{ env.REGISTRY_NAME }}
 
-    - name: Build and push Docker image
-      uses: docker/build-push-action@v5
-      with:
-        file: ./Dockerfile
-        push: true
-        tags: ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+    # - name: Build and push Docker image
+    #   uses: docker/build-push-action@v5
+    #   with:
+    #     file: ./Dockerfile
+    #     push: true
+    #     tags: ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
 
     - name: Build and push image
       id: build-image
