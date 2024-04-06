@@ -43,4 +43,4 @@ jobs:
         with:
           azcliversion: 2.59.0
           inlineScript: |
-            az deployment group create --resource-group RG1 --name rollout01 --template-file .\main.bicep --parameters .\main.bicepparam
+            az deployment group create --resource-group RG1 --name rollout01 --template-file main.bicep --parameters main.bicepparam
