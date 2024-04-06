@@ -19,7 +19,7 @@ jobs:
     steps:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # Authenticate to Az CLI using OIDC
       - name: "Az CLI login"
@@ -30,11 +30,17 @@ jobs:
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
       # Deploy
-      - name: Deploy
-        uses: azure/arm-deploy@v2
+      # - name: Deploy
+      #   uses: azure/arm-deploy@v2
+      #   with:
+      #     scope: resourcegroup
+      #     failOnStdErr: false
+      #     resourceGroupName: ${{ env.resource-group }}
+      #     template: .\main.bicep
+          
+      - name: Azure CLI script
+        uses: azure/cli@v2
         with:
-          scope: resourcegroup
-          failOnStdErr: false
-          resourceGroupName: ${{ env.resource-group }}
-          template: main.bicep
-          parameters: main.bicepparram
+          azcliversion: 2.59.0
+          inlineScript: |
+            az deployment group create --resource-group RG1 --name rollout01 --template-file .\main.bicep --parameters .\main.bicepparam
