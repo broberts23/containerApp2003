@@ -25,12 +25,25 @@ jobs:
     # - name: Set up Docker Buildx
     #   uses: docker/setup-buildx-action@v3
 
-    - name: "Az CLI login"
-      uses: azure/login@v2
+    # - name: "Az CLI login"
+    #   uses: azure/login@v2
+    #   with:
+    #     client-id: ${{ secrets.AZURE_CLIENT_ID }}
+    #     tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+    #     subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+    - name: Login to Azure Container Registry
+      uses: azure/docker-login@v5
       with:
-        client-id: ${{ secrets.AZURE_CLIENT_ID }}
-        tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-        subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        login-server: ${{ env.REGISTRY_NAME }}.azurecr.io
+
+    - name: Build Docker image
+      run: docker build .
+
+    - name: Push Docker image to Azure Container Registry
+      run: |
+        docker tag ${{ env.IMAGE_NAME }}:latest ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+        docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }} 
 
     # - name: Build and push Docker image
     #   uses: docker/build-push-action@v5
@@ -38,8 +51,3 @@ jobs:
     #     file: ./Dockerfile
     #     push: true
     #     tags: ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
-
-    - name: Build and push image
-      id: build-image
-      run: |
-        az acr build --image ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }} --registry ${{ env.REGISTRY_NAME }} --file "Dockerfile" .
