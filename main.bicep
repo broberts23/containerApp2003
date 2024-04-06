@@ -96,6 +96,7 @@ module registry 'br/public:avm/res/container-registry/registry:0.1.1' = {
     acrSku: 'Premium'
     publicNetworkAccess: 'Enabled'
     softDeletePolicyStatus: 'disabled'
+    exportPolicyStatus: 'enabled'
     location: location
     tags: {
       Environment: environment
