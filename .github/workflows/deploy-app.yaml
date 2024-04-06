@@ -41,6 +41,9 @@ jobs:
     # - run: |
     #     docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
     #     docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+    - name: Login to ACR
+      run: |
+        az acr login --name ${{ env.REGISTRY_NAME }}
 
     - name: Build and push Docker image
       uses: docker/build-push-action@v5
