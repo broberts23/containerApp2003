@@ -10,7 +10,7 @@ permissions:
     
   
 env:
-  REGISTRY_NAME: acrapl20031  # Set your registry name here
+  REGISTRY_NAME: devacrulelz55lpshjc  # Set your registry name here
   IMAGE_NAME: app2003  # Set your image name here
 
 jobs:
@@ -22,8 +22,8 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@main
 
-    # - name: Set up Docker Buildx
-    #   uses: docker/setup-buildx-action@v3
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
 
     - name: "Az CLI login"
       uses: azure/login@v2
@@ -32,19 +32,19 @@ jobs:
         tenant-id: ${{ secrets.AZURE_TENANT_ID }}
         subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
 
-    - uses: azure/docker-login@v1
-      with:
-        login-server: ${{ env.REGISTRY_NAME }}.azurecr.io
-        username: ${{ secrets.REGISTRY_USERNAME }}
-        password: ${{ secrets.REGISTRY_PASSWORD }}
-    
-    - run: |
-        docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
-        docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
-
-    # - name: Build and push Docker image
-    #   uses: docker/build-push-action@v5
+    # - uses: azure/docker-login@v1
     #   with:
-    #     file: ./Dockerfile
-    #     push: true
-    #     tags: ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+    #     login-server: ${{ env.REGISTRY_NAME }}.azurecr.io
+    #     username: ${{ secrets.REGISTRY_USERNAME }}
+    #     password: ${{ secrets.REGISTRY_PASSWORD }}
+    
+    # - run: |
+    #     docker build . -t ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+    #     docker push ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
+
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        file: ./Dockerfile
+        push: true
+        tags: ${{ env.REGISTRY_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ github.sha }}
