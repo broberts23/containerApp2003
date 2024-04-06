@@ -1,7 +1,7 @@
 param location string
 param environment string
 
-var acrName = '${environment}-acr-${uniqueString(resourceGroup().id)}'
+var acrName = '${environment}acr${uniqueString(resourceGroup().id)}'
 var vnetName = '${environment}-vnet-${uniqueString(resourceGroup().id)}'
 var umiName = '${environment}-umi-${uniqueString(resourceGroup().id)}'
 // var acrPEName = '${environment}-acr-pe01'
