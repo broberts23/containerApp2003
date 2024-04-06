@@ -10,7 +10,7 @@ permissions:
     
   
 env:
-  REGISTRY_NAME: devacrulelz55lpshjc  # Set your registry name here
+  REGISTRY_NAME: acrapl20031  # Set your registry name here
   IMAGE_NAME: app2003  # Set your image name here
 
 jobs:
