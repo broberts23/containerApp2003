@@ -44,14 +44,14 @@
                 "build"
             ],
             "dockerBuild": {
-                "tag": "deploymanagecontainerappusingazurecontainerapp:dev",
+                "tag": "containerapp2003:dev",
                 "target": "base",
                 "dockerfile": "${workspaceFolder}/Dockerfile",
                 "context": "${workspaceFolder}",
                 "pull": true
             },
             "netCore": {
-                "appProject": "${workspaceFolder}/deploy-manage-container-app-using-azure-container-app.csproj"
+                "appProject": "${workspaceFolder}/containerApp2003.csproj"
             }
         },
         {
@@ -61,7 +61,7 @@
                 "build"
             ],
             "dockerBuild": {
-                "tag": "deploymanagecontainerappusingazurecontainerapp:latest",
+                "tag": "containerapp2003:latest",
                 "dockerfile": "${workspaceFolder}/Dockerfile",
                 "context": "${workspaceFolder}",
                 "platform": {
@@ -71,7 +71,7 @@
                 "pull": true
             },
             "netCore": {
-                "appProject": "${workspaceFolder}/deploy-manage-container-app-using-azure-container-app.csproj"
+                "appProject": "${workspaceFolder}/containerApp2003.csproj"
             }
         },
         {
@@ -82,7 +82,7 @@
             ],
             "dockerRun": {},
             "netCore": {
-                "appProject": "${workspaceFolder}/deploy-manage-container-app-using-azure-container-app.csproj",
+                "appProject": "${workspaceFolder}/containerApp2003.csproj",
                 "enableDebugging": true
             }
         },
@@ -94,7 +94,7 @@
             ],
             "dockerRun": {},
             "netCore": {
-                "appProject": "${workspaceFolder}/deploy-manage-container-app-using-azure-container-app.csproj"
+                "appProject": "${workspaceFolder}/containerApp2003.csproj"
             }
         }
     ]

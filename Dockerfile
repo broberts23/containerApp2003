@@ -8,17 +8,17 @@ USER app
 FROM --platform=$BUILDPLATFORM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG configuration=Release
 WORKDIR /src
-COPY ["deploy-manage-container-app-using-azure-container-app.csproj", "./"]
-RUN dotnet restore "deploy-manage-container-app-using-azure-container-app.csproj"
+COPY ["containerApp2003.csproj", "./"]
+RUN dotnet restore "containerApp2003.csproj"
 COPY . .
 WORKDIR "/src/."
-RUN dotnet build "deploy-manage-container-app-using-azure-container-app.csproj" -c $configuration -o /app/build
+RUN dotnet build "containerApp2003.csproj" -c $configuration -o /app/build
 
 FROM build AS publish
 ARG configuration=Release
-RUN dotnet publish "deploy-manage-container-app-using-azure-container-app.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "containerApp2003.csproj" -c $configuration -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "deploy-manage-container-app-using-azure-container-app.dll"]
+ENTRYPOINT ["dotnet", "containerApp2003.dll"]
